@@ -1,6 +1,9 @@
 const express = require('express');
 
 const tasks = require('./routes/tasks');
+const connectDB = require('./db/dbconnection');
+const { STATES } = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 
@@ -12,6 +15,16 @@ app.get('/home', (req, res) => {
 
 app.use('/api/v1/tasks', tasks);
 
-app.listen(PORT, () => {
-  console.log(`Express server listening on port ${PORT}!!!`);
-});
+const startDBandServer = async () => {
+  try {
+    await connectDB(process.env.MONGODB_URI);
+    app.listen(
+      PORT,
+      console.log(`Express server listening on port ${PORT}!!!`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+startDBandServer();
