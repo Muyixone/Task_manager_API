@@ -2,12 +2,15 @@ const express = require('express');
 
 const tasks = require('./routes/tasks');
 const connectDB = require('./db/dbconnection');
-const { STATES } = require('mongoose');
+
 require('dotenv').config();
 
 const app = express();
 
 const PORT = 5000;
+
+//middlewares
+app.use(express.json());
 
 app.get('/home', (req, res) => {
   res.send('Welcome to the home page!!!');
