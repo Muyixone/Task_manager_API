@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const app = express();
 
-const PORT = 5000;
+const port = process.env.PORT || 5000;
 
 //middlewares
 app.use(express.json());
@@ -22,7 +22,7 @@ const startDBandServer = async () => {
   try {
     await connectDB(process.env.MONGODB_URI);
     app.listen(
-      PORT,
+      port,
       console.log(`Express server listening on port ${PORT}!!!`)
     );
   } catch (error) {
