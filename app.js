@@ -3,6 +3,7 @@ const express = require('express');
 const tasks = require('./routes/tasks');
 const notFound = require('./middlewares/notfound');
 const connectDB = require('./db/dbconnection');
+const errorHandler = require('./middlewares/errorHandler');
 
 require('dotenv').config();
 
@@ -14,7 +15,8 @@ const PORT = 5000;
 app.use(express.json());
 
 app.use('/api/v1/tasks', tasks);
-app.use('*', notFound);
+app.use(notFound);
+app.use(errorHandler);
 
 const startDBandServer = async () => {
   try {
