@@ -23,7 +23,7 @@ const startDBandServer = async () => {
     await connectDB(process.env.MONGODB_URI);
     app.listen(
       port,
-      console.log(`Express server listening on port ${PORT}!!!`)
+      console.log(`Express server listening on port ${port}!!!`)
     );
   } catch (error) {
     console.log(error);
